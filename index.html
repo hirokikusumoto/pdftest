@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF.js + Base64 別タブ表示（iframe/canvasなし）</title>
+</head>
+<body>
+  <h2>Base64 PDF を PDF.js viewer.html で別タブ表示</h2>
+  <button onclick="openPdfInViewer()">PDFを表示</button>
+
+  <script>
+    const base64Pdf = `
+JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4K
+ZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4K
+ZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAg
+MCA1MDAgNzc4XSAKL0NvbnRlbnRzIDQgMCBSIC9SZXNvdXJjZXMgPDwgL0ZvbnQgPDwgL0YxIDUg
+MCBSID4+ID4+ID4+CmVuZG9iago0IDAgb2JqCjw8IC9MZW5ndGggNDMgPj4Kc3RyZWFtCkJUCi9G
+MSAyNCBUZgovMTAwIDcwMCBUZAppKEhlbGxvIFBERiEgZnJvbSBiYXNlNjQpIFRqCkVUCmVuZHN0
+cmVhbQplbmRvYmoKNSAwIG9iago8PCAvVHlwZSAvRm9udCAvU3VidHlwZSAvVHlwZTEgL0Jhc2VG
+b250IC9IZWx2ZXRpY2EgPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZgowMDAw
+MDAwMDExIDAwMDAwIG4KMDAwMDAwMDA3NiAwMDAwMCBuCjAwMDAwMDAxNDUgMDAwMDAgbgowMDAw
+MDAwMzA5IDAwMDAwIG4KMDAwMDAwMDQ1MSAwMDAwMCBuCnRyYWlsZXIKPDwgL1Jvb3QgMSAwIFIg
+L1NpemUgNiA+PgpzdGFydHhyZWYKNTA4CiUlRU9G
+`.replace(/\s/g, '');
+
+    function openPdfInViewer() {
+      const binary = atob(base64Pdf);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blobUrl = URL.createObjectURL(blob);
+
+      // viewer.html に渡す
+      const viewerUrl = 'pdfjs/web/viewer.html?file=' + encodeURIComponent(blobUrl);
+      window.open(viewerUrl, '_blank');
+    }
+  </script>
+</body>
+</html>

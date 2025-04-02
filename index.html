@@ -6,7 +6,8 @@
 </head>
 <body>
   <h2>PDF別タブ出力テスト</h2>
-  <button onclick="openPdfInViewer()">PDFを表示</button>
+  <button onclick="openPdf()">PDFを表示1</button>
+  <button onclick="openPdfInViewer()">PDFを表示2</button>
 
   <script>
     const base64Pdf = `
@@ -7171,6 +7172,19 @@ L1Jvb3QgMSAwIFIKL1NpemUgMjMKPj4Kc3RhcnR4cmVmCjQwNzM0MAolJUVPRgo=
 `.replace(/\s/g, '');
 
     function openPdfInViewer() {
+
+      const blobUrl = changeBase64PDF();
+      // viewer.html に渡す
+      const viewerUrl = 'pdfjs/web/viewer.html?file=' + encodeURIComponent(blobUrl);
+      window.open(viewerUrl, '_blank');
+    }
+
+    function openPdf() {
+      const blobUrl = changeBase64PDF();
+      window.open(blobUrl, '_blank');
+    }
+
+    function changeBase64PDF() {
       const binary = atob(base64Pdf);
       const bytes = new Uint8Array(binary.length);
       for (let i = 0; i < binary.length; i++) {
@@ -7178,10 +7192,7 @@ L1Jvb3QgMSAwIFIKL1NpemUgMjMKPj4Kc3RhcnR4cmVmCjQwNzM0MAolJUVPRgo=
       }
       const blob = new Blob([bytes], { type: 'application/pdf' });
       const blobUrl = URL.createObjectURL(blob);
-
-      // viewer.html に渡す
-      const viewerUrl = 'pdfjs/web/viewer.html?file=' + encodeURIComponent(blobUrl);
-      window.open(viewerUrl, '_blank');
+      return blobUrl;
     }
   </script>
 </body>

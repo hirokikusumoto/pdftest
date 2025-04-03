@@ -2,12 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <title>PDF出力テスト</title>
 </head>
-<body>
-  <h2>PDF別タブ出力テスト</h2>
-  <button onclick="openPdf()">PDFを表示1</button>
-  <button onclick="openPdfInViewer()">PDFを表示2</button>
+<body class="bg-light">
+  <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <h2 class="mb-4 text-center">PDF別タブ出力テスト</h2>
+    <button class="btn btn-primary btn-lg" onclick="openPdfInViewer()">PDFを表示</button>
+  </div>
 
   <script>
     const base64Pdf = `
@@ -7177,11 +7180,6 @@ L1Jvb3QgMSAwIFIKL1NpemUgMjMKPj4Kc3RhcnR4cmVmCjQwNzM0MAolJUVPRgo=
       // viewer.html に渡す
       const viewerUrl = 'pdfjs/web/viewer.html?file=' + encodeURIComponent(blobUrl);
       window.open(viewerUrl, '_blank');
-    }
-
-    function openPdf() {
-      const blobUrl = changeBase64PDF();
-      window.open(blobUrl, '_blank');
     }
 
     function changeBase64PDF() {

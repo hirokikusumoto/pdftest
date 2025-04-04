@@ -10,9 +10,11 @@
   <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <h2 class="mb-4 text-center">PDF別タブ出力テスト</h2>
     <button class="btn btn-primary btn-lg" onclick="openPdfInViewer()">PDFを表示</button>
+    <p class="d-none isDisplay">ボタンが押されました。</p>
   </div>
 
   <script>
+    var isDisplay = false;
     const base64Pdf = `
 JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4K
 JVBERi0xLjcKCjQgMCBvYmoKKElkZW50aXR5KQplbmRvYmoKNSAwIG9iagooQWRvYmUpCmVuZG9i
@@ -7175,7 +7177,10 @@ L1Jvb3QgMSAwIFIKL1NpemUgMjMKPj4Kc3RhcnR4cmVmCjQwNzM0MAolJUVPRgo=
 `.replace(/\s/g, '');
 
     function openPdfInViewer() {
-
+      const element = document.querySelector('.isDisplay');
+      if (!isDisplay) {
+        element.classList.remove('d-none');
+      }
       const blobUrl = changeBase64PDF();
       // viewer.html に渡す
       const viewerUrl = 'pdfjs/web/viewer.html?file=' + encodeURIComponent(blobUrl);

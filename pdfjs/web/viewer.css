@@ -3526,3 +3526,38 @@ dialog :link {
     display: none;
   }
 }
+
+/* サイドバー、検索、ツールバーなどを非表示 */
+#sidebarContainer,
+#toolbarViewerLeft,
+#toolbarViewerMiddle,
+#secondaryToolbar,
+#viewOutline,
+#viewAttachments,
+#viewThumbnail,
+#presentationMode,
+#openFile,
+#print,
+#editorModeButtons,
+#editorModeSeparator,
+#secondaryToolbarToggle,
+#zoomIn,
+#zoomOut,
+#scaleSelectContainer,
+#findbar,
+#viewFind,
+#pageNumber,
+#previous,
+#next,
+#numPages,
+#cursorSelectTool,
+#cursorHandTool,
+#scrollModeButtons,
+#spreadModeButtons {
+  display: none !important;
+}
+
+/* ダウンロードボタンだけ中央右側に残す（必要に応じて調整） */
+#toolbarViewerRight {
+  justify-content: flex-end;
+}

@@ -3528,7 +3528,7 @@ dialog :link {
 }
 
 /* サイドバー、検索、ツールバーなどを非表示 */
-#sidebarContainer,
+/* #sidebarContainer,
 #toolbarViewerLeft,
 #toolbarViewerMiddle,
 #secondaryToolbar,
@@ -3558,6 +3558,6 @@ dialog :link {
 }
 
 /* ダウンロードボタンだけ中央右側に残す（必要に応じて調整） */
-#toolbarViewerRight {
+/* #toolbarViewerRight {
   justify-content: flex-end;
-}
+} */
